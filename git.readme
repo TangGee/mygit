@@ -1,0 +1,7 @@
+git rm --cached filename 移除暂存区而不删除原文件
+
+撤销操作  一定要小心 如果失误可能丢失一部分工作
+  git commit --amend 重新提交 
+
+git reset HEAD <file> ...取消暂存
+
