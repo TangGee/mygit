@@ -5,3 +5,123 @@ git rm --cached filename 移除暂存区而不删除原文件
 
 git reset HEAD <file> ...取消暂存
 
+git checkout -- <filename> 将文件会退到上次提交
+
+git remote -v [url]  查看远程地址存在的多个仓库
+
+git remote add [shortname] [url]  添加仓库
+ git fetch[remote name]  抓取其他仓库 到笨地仓库 git fetch origin 抓取默认所有
+
+git remot 查看当前远程仓库 -v 查看详细地址 如果有多个也会列出多个
+
+git  push origin master 推送数据到origin服务器的master分支 
+ 只有远程服务器有写权限或者同一时刻没有人推送 酒可以
+
+git remote show origin 查看远程仓库信息
+
+git remote rename 原名 新名称   修改远程残酷的名称 
+
+git remot rm xxx 移除远端仓库 
+
+打标签 
+ git tag  列出现有标签
+
+git tag -l 'v1.4.2.*' 模糊查看
+
+新建标签 有两种 一种是轻量级的  一种是韩附注的  轻量级的是个不会变化的分支   
+含附注的是远端存储仓库的一个附注 有独立的较验信息
+也可以用gpg去验证
+
+git tag -a v1.4 -m 'my version 1.4 ' 含有附注的标签创建
+git tag -s v1.4 -m 'my version 1.4  '  如果有自己的迷失可以生成独立签名的标签
+
+轻量级标签 
+git tag v1.4 -lw
+
+git tag -v [tag-name] 验证标签 需要有创建者的签名公钥放在keyring中
+
+git tag -a v1.2 9fceb02 给某次提交打上标签  用校验和就可以
+
+分享标签  
+ 默认情况 git push 不会把标签推送到服务器  要想推送
+git push origin v1.5
+
+要一次推送所有标签到服务器 
+ git push origin --tags
+
+设置别名
+$ git config --global alias.co checkout $ git config --global alias.br branch
+$ git config --global alias.ci commit
+$ git config --global alias.st status
+
+
+创建分支
+  git branch testing
+
+git checkout testing 切换分支
+
+git barnch -b xxx 创建并切换到分支
+
+git merge hotfix 合并分支到主分支
+
+git breanch －d xxx 删除某个分支
+
+
+解决冲突 
+  解决完冲突要用 git add 添加到暂存区
+
+git mergetool 用于解决冲突
+
+管理分支 
+git branch  查看已有分支
+
+git branch -v  查看各个分支最后一次提交
+
+git branch --merged查看哪个分支已经合并到当前分支 
+
+git branch --no-merged  查看未合并的分支
+
+未合并的分支如果要删除 用 git barnched -D xxx
+
+git push 远程仓库名 分支名
+
+git checkout --track origin/serverfix 获取远程仓库的分支
+
+git push origin :serverfix 删除远程分支
+
+
+git push [远程名] [本地分支]:[远程分支]  提交本地分支 到远程仓库
+
+衍合分支
+
+$ git checkout experiment
+$ git rebase master
+
+
+git rebase --onto master server client 找到client 和server的祖先 并把client发生的变化重演到主分支上
+然后执行 合并
+$ git checkout master 
+$ git merge client
+
+永远不要眼合那些已经推送到公共服务的更新
+
+在服务器部署git
+git clone --bare my_project my_project.git建立一个空git服务
+$ ssh user@git.example.com
+$ cd /opt/git/my_project.git 
+$ git init --bare --shared
+
+自定义git
+自定义提交模版
+git config --global commit.template $HOME/.gitmessage.txt
+
+设置密匙
+git config --global user.signingkey <gpg-key-id>
+
+设置默认终端着色
+git config --global color.ui true
+
+
+
+ 
+
